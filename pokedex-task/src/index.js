@@ -22,6 +22,7 @@ const getPokemonById = async (Id) => {
 const changeDomDescById = async (id) =>{
     try {
         const data = await getPokemonById(id);
+        inputById.value = '' //reset input value
         byIdName.innerText ='name: ' + data.name;
         byIdHeight.innerText ='height: ' + data.height;
         byIdWeight.innerText = 'weight: ' + data.weight;
@@ -29,6 +30,8 @@ const changeDomDescById = async (id) =>{
         byIdImg.addEventListener('mouseover', (e) => changepostion(data.sprites))
         errorHandler(); //reset this label after change in case of an error
         addPokemonTypes(data.types);
+        deleteDropDown();
+        deleteReloadBtn();
         return 
     } catch (error) {
         return
@@ -58,6 +61,7 @@ const addPokemonTypes = (typesArr) =>{
         const button = document.createElement('button');
         button.innerText= type.type.name;
         button.classList.add('pokeTypes');
+        button.addEventListener('click', ()=>{showAllPokemonByType(type.type.name)})
         Types.append(button);
     }
 }
@@ -69,6 +73,60 @@ const deleteExistingTypes = () =>{
         button.remove()
         deleteExistingTypes(); //recursion because without it the first type always remains
         }
+    }
+}
+
+const showAllPokemonByType = async (type) => {
+    const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);
+    const allPokemonsRec = response.data.pokemon;
+    deleteDropDown();
+    const selectElem = createDropDown();
+    for(let pokeName of allPokemonsRec ){
+        createOption(pokeName.pokemon.name, selectElem);
+    }
+    selectElem.addEventListener('change', reloadtoNewPokemonOption) //creates reloadPokedex btn on change of selection
+}
+const createOption = (pokeName , parentElem) =>{
+    const optionElem =document.createElement('option');
+    optionElem.value = pokeName;
+    optionElem.textContent = pokeName;
+    parentElem.append(optionElem);
+}
+const createDropDown = () =>{
+    const drpDownTypes = document.createElement('select');
+    drpDownTypes.id= 'pokemonNames';
+    pokemonDet.append(drpDownTypes);
+    return drpDownTypes;
+}
+
+const deleteDropDown = () =>{
+    try {
+        const elem = document.getElementById('pokemonNames');
+        elem.remove();
+    } catch (error) {
+        return
+    }
+}
+
+const reloadtoNewPokemonOption = () =>{
+    try {
+        deleteReloadBtn(); //delete existing button if there is one
+        const selectedPokemon= document.getElementById('pokemonNames').value
+        const newPokemonBtn = document.createElement('button');
+        newPokemonBtn.id = 'newPokemonBtn';
+        pokemonDet.append(newPokemonBtn);
+        newPokemonBtn.textContent = `Find ${selectedPokemon}`;
+        newPokemonBtn.addEventListener('click', ()=> {changeDomDescById(selectedPokemon)})
+    } catch (error) {
+        return
+    }
+}
+const deleteReloadBtn = () =>{
+    try {
+        const btn= document.getElementById('newPokemonBtn')
+        btn.remove();
+    } catch (error) {
+        return
     }
 }
 //event listeners
