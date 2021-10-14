@@ -4,14 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pokedex</title>
+    <script src="./src/index.js" defer></script>
      <!-- Bootstrap core CSS -->
      <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
      <!-- Material Design Bootstrap -->
      <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/css/mdb.min.css" rel="stylesheet">  
 </head>
 <body>
+ 
+  <div class="input-group mb-3 mt-5 w-50 ">
+    <input type="text" class="form-control" id="inputById" placeholder="Enter pokedex id" aria-label="Search By Id">
+    <button class="btn btn-outline-secondary" type="button" id="searchByIdButton">search By Id</button>
+  </div>
+  <div class="searchIdResults">
+    <label id="idSearchHeading">Pokemon Info:</label>
+    <ul class="list-group w-50" class="showIdResults">
+      <li class="list-group-item"> <label id="byIdName">Name: </label></li>
+      <li class="list-group-item"> <label id="byIdHeight">Height: </label></li>
+      <li class="list-group-item"> <label id="byIdWeight">Weight: </label></li>
+      <li class="list-group-item"><img src="" id="byIdImg" class="img-thumbnail" alt="Pokemon Image"></li>
+    </ul>
+  </div>  
     
+   
 
 
 
