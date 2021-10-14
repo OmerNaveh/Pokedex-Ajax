@@ -129,5 +129,5 @@ const deleteReloadBtn = () =>{
         return
     }
 }
-//event listeners
+//general event listeners
 searchByIdButton.addEventListener('click',(e)=> changeDomDescById(inputById.value))
