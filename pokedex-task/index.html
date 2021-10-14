@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
     <script src="./src/index.js" defer></script>
+    <link href='./styles/styles.css' rel='stylesheet'>
      <!-- Bootstrap core CSS -->
      <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
      <!-- Material Design Bootstrap -->
@@ -14,25 +15,25 @@
 <body>
  
   <div class="input-group mb-3 mt-5 w-50 ">
-    <input type="text" class="form-control" id="inputById" placeholder="Enter pokedex id" aria-label="Search By Id">
-    <button class="btn btn-outline-secondary" type="button" id="searchByIdButton">search By Id</button>
+    <input type="text" class="form-control" id="inputById" placeholder="Enter pokedex id or pokemon name" aria-label="Search By Id">
+    <button class="btn btn-outline-secondary" type="button" id="searchByIdButton">search Pokemon</button>
   </div>
   <div class="searchIdResults">
     <label id="idSearchHeading">Pokemon Info:</label>
-    <ul class="list-group w-50" class="showIdResults">
+    <ul id="pokemonDet" class="list-group w-50 showIdResults">
       <li class="list-group-item"> <label id="byIdName">Name: </label></li>
       <li class="list-group-item"> <label id="byIdHeight">Height: </label></li>
       <li class="list-group-item"> <label id="byIdWeight">Weight: </label></li>
       <li class="list-group-item"><img src="" id="byIdImg" class="img-thumbnail" alt="Pokemon Image"></li>
+      <li class="list-group-item">
+      <label>Pokemon Type:</label>
+      <span id="Types"></span>
+      </li>
     </ul>
   </div>  
     
-   
 
-
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/js/mdb.min.js"></script>
