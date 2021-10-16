@@ -12,7 +12,12 @@ const Types = document.getElementById('Types')
 const getPokemonById = async (Id) => {
     try {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Id}`);
-        return response.data;
+        if(response.data.name ===undefined){ //in case someone doesnt enter a value
+            throw('error') 
+        }
+        else{
+            return response.data;
+        }
     } catch (error) {
         errorHandler(error);
         return
@@ -81,6 +86,7 @@ const showAllPokemonByType = async (type) => {
     const allPokemonsRec = response.data.pokemon;
     deleteDropDown();
     const selectElem = createDropDown();
+    firstDeafaultOption(selectElem);
     for(let pokeName of allPokemonsRec ){
         createOption(pokeName.pokemon.name, selectElem);
     }
@@ -90,6 +96,13 @@ const createOption = (pokeName , parentElem) =>{
     const optionElem =document.createElement('option');
     optionElem.value = pokeName;
     optionElem.textContent = pokeName;
+    parentElem.append(optionElem);
+}
+const firstDeafaultOption = (parentElem)=>{ //creates first disabled option so all pokemon will be available for selection
+    const optionElem =document.createElement('option');
+    optionElem.disabled ='true';
+    optionElem.selected = 'true';
+    optionElem.textContent = 'Select Pokemon';
     parentElem.append(optionElem);
 }
 const createDropDown = () =>{
