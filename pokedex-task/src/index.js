@@ -9,7 +9,9 @@ const idSearchHeading = document.getElementById('idSearchHeading')
 const pokemonDet = document.getElementById('pokemonDet');
 const Types = document.getElementById('Types') 
 
-const getPokemonById = async (Id) => {
+
+//main functions
+const getPokemonById = async (Id) => {  //fetching data from api
     try {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Id}`);
         if(response.data.name ===undefined){ //in case someone doesnt enter a value
@@ -24,13 +26,13 @@ const getPokemonById = async (Id) => {
     }
 }
 
-const changeDomDescById = async (id) =>{
+const changeDomDescById = async (id) =>{ //changing the Dom
     try {
         const data = await getPokemonById(id);
         inputById.value = '' //reset input value
-        byIdName.innerText ='name: ' + data.name;
-        byIdHeight.innerText ='height: ' + data.height;
-        byIdWeight.innerText = 'weight: ' + data.weight;
+        byIdName.innerText ='Name: ' + data.name;
+        byIdHeight.innerText ='Height: ' + data.height;
+        byIdWeight.innerText = 'Weight: ' + data.weight;
         byIdImg.src= data.sprites['front_default'];
         byIdImg.addEventListener('mouseover', (e) => changepostion(data.sprites))
         errorHandler(); //reset this label after change in case of an error
@@ -42,7 +44,9 @@ const changeDomDescById = async (id) =>{
         return
     }
 }
-const changepostion = (data) =>{
+
+//side functions
+const changepostion = (data) =>{ //switches between frond and back images
     byIdImg.src = data['back_default'];
     byIdImg.addEventListener('mouseout' , () =>{
         byIdImg.src= data['front_default']; })
@@ -60,7 +64,7 @@ const errorHandler = (error) =>{
     }
 }
 
-const addPokemonTypes = (typesArr) =>{
+const addPokemonTypes = (typesArr) =>{ //creates buttons according to pokemon types
     deleteExistingTypes(); //delete already created typed to avoid duplication
     for(let type of typesArr){
         const button = document.createElement('button');
@@ -71,7 +75,7 @@ const addPokemonTypes = (typesArr) =>{
     }
 }
 
-const deleteExistingTypes = () =>{
+const deleteExistingTypes = () =>{ //reset the Dom buttons after change
     const buttons = document.getElementsByClassName('pokeTypes');
     for(let button of buttons){
         if(buttons.length>0){
@@ -81,7 +85,7 @@ const deleteExistingTypes = () =>{
     }
 }
 
-const showAllPokemonByType = async (type) => {
+const showAllPokemonByType = async (type) => { //changes Dom according to api Data to how all pokemon by type
     const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`);
     const allPokemonsRec = response.data.pokemon;
     deleteDropDown();
@@ -92,7 +96,7 @@ const showAllPokemonByType = async (type) => {
     }
     selectElem.addEventListener('change', reloadtoNewPokemonOption) //creates reloadPokedex btn on change of selection
 }
-const createOption = (pokeName , parentElem) =>{
+const createOption = (pokeName , parentElem) =>{ //creates option elements
     const optionElem =document.createElement('option');
     optionElem.value = pokeName;
     optionElem.textContent = pokeName;
@@ -105,7 +109,7 @@ const firstDeafaultOption = (parentElem)=>{ //creates first disabled option so a
     optionElem.textContent = 'Select Pokemon';
     parentElem.append(optionElem);
 }
-const createDropDown = () =>{
+const createDropDown = () =>{ //creates the select element
     const drpDownTypes = document.createElement('select');
     drpDownTypes.id= 'pokemonNames';
     pokemonDet.append(drpDownTypes);
@@ -121,7 +125,7 @@ const deleteDropDown = () =>{
     }
 }
 
-const reloadtoNewPokemonOption = () =>{
+const reloadtoNewPokemonOption = () =>{ //creates button to research by new selected pokemon
     try {
         deleteReloadBtn(); //delete existing button if there is one
         const selectedPokemon= document.getElementById('pokemonNames').value
