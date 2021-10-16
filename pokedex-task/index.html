@@ -13,25 +13,27 @@
      <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.7/css/mdb.min.css" rel="stylesheet">  
 </head>
 <body>
-  
-  <div class="input-group mb-3 mt-1 w-50">
-    <input type="text" class="form-control" id="inputById" placeholder="Enter pokedex id or pokemon name" aria-label="Search By Id">
+  <main class= 'main'>
+
+    <div class="input-group mb-3 mt-3 w-50">
+      <input type="text" class="form-control" id="inputById" placeholder="Enter pokedex id or pokemon name" aria-label="Search By Id">
     <button class="btn btn-outline-secondary" type="button" id="searchByIdButton">search Pokemon</button>
   </div>
   <div class="searchIdResults">
     <label id="idSearchHeading">Pokemon Info:</label>
     <ul id="pokemonDet" class="list-group w-50 showIdResults">
-      <li class="list-group-item"> <label id="byIdName">Name: </label></li>
-      <li class="list-group-item"> <label id="byIdHeight">Height: </label></li>
-      <li class="list-group-item"> <label id="byIdWeight">Weight: </label></li>
-      <li class="list-group-item"><img src="" id="byIdImg" class="img-thumbnail" alt="Pokemon Image"></li>
-      <li class="list-group-item">
+      <li class="li-Det"> <label id="byIdName">Name: </label></li>
+      <li class="li-Det"> <label id="byIdHeight">Height: </label></li>
+      <li class="li-Det"> <label id="byIdWeight">Weight: </label></li>
+      <img src="" id="byIdImg" class="img-thumbnail" alt="Pokemon Image">
+      <li class="li-Det">
       <label>Pokemon Type:</label>
       <span id="Types"></span>
       </li>
     </ul>
   </div>  
     
+</main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>

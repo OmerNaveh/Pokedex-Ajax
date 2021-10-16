@@ -60,7 +60,7 @@ const addPokemonTypes = (typesArr) =>{
     for(let type of typesArr){
         const button = document.createElement('button');
         button.innerText= type.type.name;
-        button.classList.add('pokeTypes');
+        button.classList.add('pokeTypes', 'btn');
         button.addEventListener('click', ()=>{showAllPokemonByType(type.type.name)})
         Types.append(button);
     }
@@ -114,6 +114,7 @@ const reloadtoNewPokemonOption = () =>{
         const selectedPokemon= document.getElementById('pokemonNames').value
         const newPokemonBtn = document.createElement('button');
         newPokemonBtn.id = 'newPokemonBtn';
+        newPokemonBtn.classList.add('btn', 'btn-outline-success', 'reloadBtn')
         pokemonDet.append(newPokemonBtn);
         newPokemonBtn.textContent = `Find ${selectedPokemon}`;
         newPokemonBtn.addEventListener('click', ()=> {changeDomDescById(selectedPokemon)})
